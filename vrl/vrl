@@ -23,7 +23,8 @@ function view_remote_log() {
     if [ -z "$selected_file" ]; then
       exit 0
     fi
-    file="$file/$selected_file"
+    selected_file=(${(f)selected_file})
+    file=$(echo ${(q)file}${^${(q)selected_file}})
   fi
 
   ssh $ssh -t "lnav $file"
